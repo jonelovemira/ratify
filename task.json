@@ -1,0 +1,30 @@
+{
+  "id": "task-001",
+  "title": "Add a health card to the counter page",
+  "repo": "./demo-repo",
+  "baseBranch": "main",
+  "visibleChange": "A green 'Health check: ok' card appears below the counter.",
+  "acceptanceCriteria": [
+    {
+      "id": "AC1",
+      "description": "index.html contains the health card element",
+      "type": "file-contains",
+      "path": "index.html",
+      "text": "id=\"health-card\""
+    },
+    {
+      "id": "AC2",
+      "description": "the page shows 'Health check: ok'",
+      "type": "file-contains",
+      "path": "index.html",
+      "text": "Health check: ok"
+    },
+    {
+      "id": "AC3",
+      "description": "app.js exposes health() returning status ok",
+      "type": "node-assert",
+      "code": "const { health } = require(process.cwd() + '/app.js'); const result = health(); if (!result || result.status !== 'ok') { console.error('health() returned ' + JSON.stringify(result)); process.exit(1); }",
+      "evidenceFile": "app.js"
+    }
+  ]
+}

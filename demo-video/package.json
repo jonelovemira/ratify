@@ -1,0 +1,17 @@
+{
+  "name": "boundary-demo-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Motion-graphics demo video for the Boundary prototype (Remotion).",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render BoundaryDemo ../demo/boundary-demo.mp4",
+    "poster": "remotion still BoundaryDemo ../demo/boundary-demo-poster.png --frame=900"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.539",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.539"
+  }
+}
