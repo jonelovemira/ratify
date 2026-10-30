@@ -25,7 +25,7 @@ On-screen detail is deliberately stripped to diff stats (`+X −Y`, files), prev
 
 | Time | Scene | Beat |
 |---|---|---|
-| 0:00.0–0:03.5 | Title | Ratify — "Coding agents that work inside the enterprise boundary." |
+| 0:00.0–0:03.5 | Title | Ratify — "Human acceptance for AI agent work, inside your network." |
 | 0:03.5–0:07.5 | 00 THE PREMISE | cold statement **"Checks passed. ≠ ACCEPTED."** (≠ in violet) — stated once, up front |
 | 0:07.5–0:12.5 | 01 EVERY TASK DIFF | **"Every task diff. Its own live preview."**; `task-001 · main → task-001 · +17 −0 · 2 files`; *"served live by the platform"*; page + review bar |
 | 0:12.5–0:34.5 | 02 DIFF FEED → PARALLEL REVIEW | left 1/4 diff swim lane; right 3/4 persistent preview grid: 1 preview in ~2s, near-instant snap to 4, then 4→9→16→25 in ~2s stages with bursts of 3–5 diff cards flying in together; acceptance sweeps the grid in batches (several ACCEPTED stamps per beat) |

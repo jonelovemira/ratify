@@ -29,7 +29,7 @@ export const TitleScene = ({ duration }: { duration: number }) => {
           <span style={{ fontSize: 118, fontWeight: 700, letterSpacing: tracking, color: THEME.text, lineHeight: 1 }}>RATIFY</span>
         </div>
         <div style={{ marginTop: 36, fontSize: 40, color: THEME.muted, opacity: tagline, transform: `translateY(${(1 - tagline) * 12}px)` }}>
-          Coding agents that work inside the enterprise boundary.
+          Human acceptance for AI agent work, inside your network.
         </div>
         <div style={{ display: 'flex', gap: 14, marginTop: 54, opacity: easeOut(frame, 56, 18) }}>
           <Pill color={THEME.violet}>parallel previews</Pill>

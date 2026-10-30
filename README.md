@@ -10,7 +10,7 @@ This folder is a working prototype of that loop, single or parallel. It runs loc
 
 ## Demo video
 
-[`demo/boundary-demo.mp4`](demo/boundary-demo.mp4) — a 41.8-second, 1920x1080 motion-graphics film: the left quarter is a live diff feed (1,000+ a day), the right three quarters are a persistent preview grid that snaps from 1 to 4 windows and then scales 4 → 9 → 16 → 25 in calm bursts (at most 3 cards in the air, ~1.3s between claims), driven by reviewer avatars; each stage swaps in a new bottom line ("One diff. One human review." → "Reviews run in parallel." → "Review capacity scales." → "The queue becomes a grid." → "Human review at agent speed."), and each preview is stamped ACCEPTED or REJECTED on its own beat before its window disappears and the slot refills, then *"Diffs arrive in parallel. Review them in parallel."* and *"A human must see it before it ships."* Silent; timed voiceover script in [`demo.md`](demo.md). Rendered from code with Remotion, so it always matches the prototype's real output.
+[`demo/ratify-demo.mp4`](demo/ratify-demo.mp4) — the 41.8-second, 1920x1080 film with music and voiceover (silent master: [`demo/ratify-demo-silent.mp4`](demo/ratify-demo-silent.mp4)): the left quarter is a live diff feed (1,000+ a day), the right three quarters are a persistent preview grid that snaps from 1 to 4 windows and then scales 4 → 9 → 16 → 25 in calm bursts (at most 3 cards in the air, ~1.3s between claims), driven by reviewer avatars; each stage swaps in a new bottom line ("One diff. One human review." → "Reviews run in parallel." → "Review capacity scales." → "The queue becomes a grid." → "Human review at agent speed."), and each preview is stamped ACCEPTED or REJECTED on its own beat before its window disappears and the slot refills, then *"Diffs arrive in parallel. Review them in parallel."* and *"A human must see it before it ships."* Voiceover script in [`demo.md`](demo.md). Rendered from code with Remotion, so it always matches the prototype's real output.
 
 To re-render after editing the film: `cd demo-video && npm install && npm run render` — see `demo-video/README.md`.
 
@@ -43,6 +43,28 @@ To re-render after editing the film: `cd demo-video && npm install && npm run re
                  v
    summary.md + summary.json (accepted/rejected counts, elapsed, branches)
 ```
+
+## Ecosystem (where Ratify fits)
+
+Ratify is the acceptance layer between the tools a team already runs:
+
+```
+task system        repo / forge        agent harness         Ratify
+Jira, Linear,      GitHub, GitLab,     Claude Code,          diff → live preview
+internal trackers  internal forge      Codex, DeepSeek       → human accept / reject
+                                       Harness               → branch + MR + report + audit
+                                                                  |
+                                                     Kubernetes (private / hybrid),
+                                                     local preview edge, internal mirrors
+```
+
+| Layer | Integration |
+|---|---|
+| **Task systems** | `task.json` is the adapter shape: task id, title, repo, base branch, visible change, acceptance criteria. Jira / Linear / internal trackers map onto it. |
+| **Repositories / forges** | Each task runs on a fresh workspace copy of a repo and lands as a branch + `mr.md`; the prototype stops at the local branch (no direct forge integration yet). |
+| **Agent harness** | Any harness that can edit files in the workspace and journal its actions — Claude Code, Codex, DeepSeek Harness, or the mock agent here. |
+| **Cloud / runtime** | Runs on a laptop in the prototype; the same loop maps to Kubernetes (private / hybrid), an internal preview edge, and internal package mirrors. |
+| **Verification** | Browser preview + human sign-off + audit trail; automated checks are support, not acceptance. |
 
 ## How to run
 
@@ -134,8 +156,10 @@ Automated checks passing does not ship a change. The prototype enforces one gate
 | `demo-repo/` | Tiny generic sample project the agent modifies (`index.html`, `app.js`, `README.md`) |
 | `agent.js` | Mock agent: visible page change + `health()`, 6 journaled actions per task |
 | `test.js` | End-to-end self-check: 2-task parallel queue with simulated acceptance + single-mode smoke check |
-| `demo.md` | Timed voiceover script for the 67-second film |
-| `demo/boundary-demo.mp4` | The motion-graphics demo (silent, 1920x1080) |
+| `demo.md` | Timed voiceover script for the 41.8-second film |
+| `demo/ratify-demo.mp4` | The motion-graphics demo with music and voiceover (1920x1080) |
+| `demo/ratify-demo-silent.mp4` | Silent master of the same film (for re-scoring / re-voicing) |
+| `demo/make-music-tech.js` | Reproducible original tech-score generator (offline synthesis) |
 | `demo-video/` | Remotion source for the film — build-time tooling only |
 
 ## What is real vs. mocked
